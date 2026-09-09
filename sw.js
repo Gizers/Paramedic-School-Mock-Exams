@@ -1,7 +1,7 @@
 /* Flat build: the entire app is index.html, so the precache is five files.
    Cache-first for the shell (it never changes between deploys), and a runtime
    cache for the Google Fonts stylesheet + woff2 so the app looks right offline. */
-const V = 'pmx-flat-v1';
+const V = 'pmx-flat-v2';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest',
                'icon-192.png', 'icon-512.png', 'icon-maskable-512.png'];
 
