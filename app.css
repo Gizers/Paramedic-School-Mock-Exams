@@ -1,0 +1,439 @@
+/* ============================================================
+   Paramedic Exam Suite — app stylesheet
+   Visual language carried over from Mike's original exam files.
+   ============================================================ */
+
+:root {
+  --ink:        #0E1216;
+  --ink-2:      #161C23;
+  --ink-3:      #1F2831;
+  --ink-4:      #2A3540;
+  --paper:      #EEF1EE;
+  --paper-dim:  #A9B4BC;
+  --muted:      #6E7C87;
+  --live:       #37C98A;
+  --live-dim:   rgba(55,201,138,0.14);
+  --miss:       #E0524C;
+  --miss-dim:   rgba(224,82,76,0.14);
+  --signal:     #F0A81E;
+  --signal-dim: rgba(240,168,30,0.14);
+  --cool:       #5AA9E6;
+  --rule:       rgba(169,180,188,0.20);
+  --rule-2:     rgba(169,180,188,0.34);
+
+  --f-disp: "Barlow Condensed", "Oswald", "Arial Narrow", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  --wrap: 760px;
+  --r: 4px;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--f-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+#app { max-width: var(--wrap); margin: 0 auto; padding: 16px 16px 64px; }
+
+/* ---------------- typography ---------------- */
+h1, h2, h3 { font-family: var(--f-disp); font-weight: 600; letter-spacing: .01em; margin: 0; }
+h1 { font-size: 32px; line-height: 1.05; }
+h2 { font-size: 23px; line-height: 1.12; }
+h3 { font-size: 18px; line-height: 1.2; }
+p { margin: 0 0 10px; }
+a { color: var(--cool); }
+
+.eyebrow {
+  font-family: var(--f-disp); font-weight: 700; font-size: 12px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--signal);
+}
+.mono { font-family: var(--f-mono); font-size: 12px; letter-spacing: .03em; }
+.dim  { color: var(--muted); }
+.lede { color: var(--paper-dim); }
+.tnum { font-variant-numeric: tabular-nums; }
+
+/* ---------------- app chrome ---------------- */
+.appbar {
+  position: sticky; top: 0; z-index: 40;
+  background: linear-gradient(var(--ink) 74%, rgba(14,18,22,0));
+  padding: 10px 0 12px;
+  margin: -16px 0 6px;
+  display: flex; align-items: center; gap: 10px;
+}
+.appbar .grow { flex: 1; min-width: 0; }
+.appbar .ttl {
+  font-family: var(--f-disp); font-weight: 600; font-size: 19px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.appbar .sub { font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+
+.iconbtn {
+  appearance: none; border: 1px solid var(--rule); background: var(--ink-2);
+  color: var(--paper-dim); border-radius: var(--r);
+  min-width: 38px; height: 38px; padding: 0 10px;
+  font-family: var(--f-disp); font-size: 15px; font-weight: 600; letter-spacing: .04em;
+  cursor: pointer; display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+}
+.iconbtn:hover { border-color: var(--rule-2); color: var(--paper); }
+
+/* ---------------- panels ---------------- */
+.panel {
+  background: var(--ink-2); border: 1px solid var(--rule);
+  border-radius: var(--r); padding: 16px; margin: 0 0 14px;
+}
+.panel.tight { padding: 12px 14px; }
+.panel.flat { background: transparent; }
+.panel-h {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 10px; margin: 0 0 10px; flex-wrap: wrap;
+}
+
+.rule { height: 1px; background: var(--rule); margin: 14px 0; border: 0; }
+
+/* ---------------- buttons ---------------- */
+.btn {
+  appearance: none; cursor: pointer; display: inline-flex;
+  align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--f-disp); font-weight: 600; font-size: 16px;
+  letter-spacing: .05em; text-transform: uppercase;
+  padding: 11px 18px; min-height: 44px;
+  border-radius: var(--r); border: 1px solid var(--signal);
+  background: var(--signal); color: #14181C;
+}
+.btn:disabled { opacity: .38; cursor: not-allowed; }
+.btn.ghost { background: transparent; color: var(--paper); border-color: var(--rule-2); }
+.btn.ghost:hover:not(:disabled) { border-color: var(--paper-dim); }
+.btn.wide { width: 100%; }
+.btn.sm { font-size: 13px; padding: 7px 12px; min-height: 34px; }
+
+.lnk {
+  appearance: none; background: none; border: 0; padding: 0;
+  color: var(--cool); font: inherit; font-size: 13px; cursor: pointer;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.row.end { justify-content: flex-end; }
+.row.tight { gap: 6px; }
+.spread { display: flex; gap: 10px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+
+/* Segmented control. Wraps into a tidy grid rather than a ragged strip when
+   the options don't fit one line — the -1px margins collapse the doubled
+   borders so every row lines up. */
+.seg {
+  display: flex; flex-wrap: wrap;
+  border: 1px solid var(--rule); border-radius: var(--r);
+  overflow: hidden; padding: 0 1px 1px 0;
+}
+.seg-b {
+  appearance: none; cursor: pointer; background: var(--ink-2); color: var(--paper-dim);
+  border: 1px solid var(--rule); margin: -1px -1px 0 0;
+  font-family: var(--f-disp); font-weight: 600; font-size: 14px; letter-spacing: .04em;
+  padding: 9px 13px; min-height: 38px; flex: 1 0 auto; text-align: center;
+}
+.seg-b.on { background: var(--ink-4); color: var(--paper); }
+.seg-b:hover:not(.on) { color: var(--paper); }
+
+/* chips */
+.chip {
+  appearance: none; cursor: pointer;
+  border: 1px solid var(--rule); background: var(--ink-3); color: var(--paper-dim);
+  border-radius: 999px; padding: 6px 12px; min-height: 32px;
+  font-size: 13px; font-family: var(--f-body);
+  display: inline-flex; align-items: center; gap: 7px;
+}
+.chip.on { border-color: var(--signal); color: var(--paper); background: var(--signal-dim); }
+.chip .ct { font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+.chip.on .ct { color: var(--signal); }
+
+/* a chapter chip and its topic-drawer caret must wrap as one unit */
+.chippair { display: inline-flex; }
+.chippair .chip { border-radius: 999px 0 0 999px; }
+.chippair .chip + .chip {
+  border-radius: 0 999px 999px 0;
+  border-left-width: 0; padding-left: 9px; padding-right: 11px;
+}
+.chippair .chip.solo { border-radius: 999px; }
+
+/* ---------------- home / module cards ---------------- */
+.modgrid { display: grid; gap: 12px; }
+.modcard {
+  display: block; width: 100%; text-align: left; cursor: pointer;
+  background: var(--ink-2); border: 1px solid var(--rule); border-left: 3px solid var(--signal);
+  border-radius: var(--r); padding: 14px 16px; color: inherit; font: inherit;
+}
+.modcard:hover { border-color: var(--rule-2); border-left-color: var(--signal); }
+.modcard .t { font-family: var(--f-disp); font-size: 21px; font-weight: 600; }
+.modcard .b { color: var(--muted); font-size: 13.5px; }
+.modcard[data-m="2"] { border-left-color: var(--cool); }
+.modcard[data-m="3"] { border-left-color: var(--live); }
+
+/* chapter rows */
+.chrow {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  background: transparent; border: 0; border-bottom: 1px solid var(--rule);
+  padding: 11px 2px; color: inherit; font: inherit; cursor: pointer; text-align: left;
+}
+.chrow:last-child { border-bottom: 0; }
+.chrow .nm { flex: 1; min-width: 0; }
+.chrow .nm b { font-weight: 500; font-size: 15px; }
+.chrow .nm small { display: block; color: var(--muted); font-size: 12px; font-family: var(--f-mono); }
+.chrow .tick {
+  width: 22px; height: 22px; flex: none; border-radius: 3px;
+  border: 1px solid var(--rule-2); color: var(--ink);
+  display: flex; align-items: center; justify-content: center; font-size: 13px;
+  background: transparent;
+}
+.chrow .tick.on { background: var(--signal); border-color: var(--signal); }
+.chrow .tick.some { background: var(--signal-dim); border-color: var(--signal); color: var(--signal); }
+
+/* mastery meter */
+.meter { height: 4px; border-radius: 2px; background: var(--ink-4); overflow: hidden; display: flex; }
+.meter i { display: block; height: 100%; }
+.meter .ok { background: var(--live); }
+.meter .mid { background: var(--signal); }
+.meter .bad { background: var(--miss); }
+
+/* ---------------- question ---------------- */
+.qhead { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; margin-bottom: 6px; }
+.qmeta { font-family: var(--f-mono); font-size: 11px; color: var(--muted); letter-spacing: .04em; }
+.qstem { font-size: 18px; line-height: 1.45; margin: 8px 0 16px; }
+.qimg { width: 100%; border-radius: var(--r); border: 1px solid var(--rule); display: block; margin: 0 0 14px; }
+
+.opts { display: grid; gap: 8px; }
+.opt {
+  display: flex; gap: 11px; align-items: flex-start; width: 100%; text-align: left;
+  background: var(--ink-3); border: 1px solid var(--rule); border-radius: var(--r);
+  padding: 12px 13px; color: var(--paper); font: inherit; font-size: 15.5px; cursor: pointer;
+  line-height: 1.45;
+}
+.opt:hover:not(:disabled) { border-color: var(--rule-2); }
+.opt .key {
+  flex: none; width: 22px; height: 22px; border-radius: 3px;
+  background: var(--ink-4); color: var(--paper-dim);
+  font-family: var(--f-mono); font-size: 12px; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; margin-top: 1px;
+}
+.opt.picked { border-color: var(--paper-dim); }
+.opt.right { border-color: var(--live); background: var(--live-dim); }
+.opt.right .key { background: var(--live); color: #0E1216; }
+.opt.wrong { border-color: var(--miss); background: var(--miss-dim); }
+.opt.wrong .key { background: var(--miss); color: #0E1216; }
+.opt:disabled { cursor: default; }
+.opt .ow { display: block; margin-top: 5px; font-size: 13px; color: var(--paper-dim); }
+
+.fb { border-left: 2px solid var(--rule-2); padding: 2px 0 2px 12px; margin: 14px 0 0; font-size: 14.5px; }
+.fb.ok { border-left-color: var(--live); }
+.fb.no { border-left-color: var(--miss); }
+.fb .verdict { font-family: var(--f-disp); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; font-size: 13px; }
+.fb.ok .verdict { color: var(--live); }
+.fb.no .verdict { color: var(--miss); }
+
+.srcline { margin-top: 12px; font-family: var(--f-mono); font-size: 11px; color: var(--muted); }
+.slidebox { margin-top: 10px; }
+.slidebox img { width: 100%; border-radius: var(--r); border: 1px solid var(--rule); display: block; }
+
+/* matching */
+.mgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.mcol-h { font-family: var(--f-mono); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 4px; }
+.mitem {
+  display: block; width: 100%; text-align: left; margin-bottom: 8px;
+  background: var(--ink-3); border: 1px solid var(--rule); border-radius: var(--r);
+  padding: 10px 11px; color: var(--paper); font: inherit; font-size: 14px; cursor: pointer; line-height: 1.35;
+}
+.mitem.sel { border-color: var(--signal); background: var(--signal-dim); }
+.mitem.done { opacity: .55; }
+.mitem.ok { border-color: var(--live); background: var(--live-dim); }
+.mitem.bad { border-color: var(--miss); background: var(--miss-dim); }
+.mitem .tag { display: block; font-family: var(--f-mono); font-size: 10px; color: var(--muted); margin-top: 3px; }
+
+/* ---------------- progress bar / timer ---------------- */
+.pbar { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.pbar .track { flex: 1; height: 3px; background: var(--ink-4); border-radius: 2px; overflow: hidden; }
+.pbar .fill { height: 100%; background: var(--signal); transition: width .2s ease; }
+.pbar .n { font-family: var(--f-mono); font-size: 12px; color: var(--muted); }
+.clock { font-family: var(--f-mono); font-size: 13px; color: var(--paper-dim); font-variant-numeric: tabular-nums; }
+.clock.low { color: var(--miss); }
+
+/* ---------------- results ---------------- */
+.score { display: flex; align-items: baseline; gap: 12px; }
+.score .big { font-family: var(--f-disp); font-size: 62px; line-height: .95; font-weight: 700; }
+.score .big.ok { color: var(--live); }
+.score .big.mid { color: var(--signal); }
+.score .big.bad { color: var(--miss); }
+
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px; }
+.stat { background: var(--ink-3); border: 1px solid var(--rule); border-radius: var(--r); padding: 10px 12px; }
+.stat .v { font-family: var(--f-disp); font-size: 25px; font-weight: 600; line-height: 1.1; }
+.stat .k { font-family: var(--f-mono); font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; }
+
+.bars { display: grid; gap: 7px; }
+.barrow { display: grid; grid-template-columns: 1fr 46px; gap: 9px; align-items: center; font-size: 13.5px; }
+.barrow .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.barrow .bt { grid-column: 1 / -1; height: 3px; background: var(--ink-4); border-radius: 2px; overflow: hidden; margin-top: -4px; }
+.barrow .bf { height: 100%; }
+.barrow .pc { text-align: right; font-family: var(--f-mono); font-size: 12px; color: var(--paper-dim); }
+
+/* review list */
+.revitem { border-bottom: 1px solid var(--rule); padding: 11px 0; }
+.revitem:last-child { border-bottom: 0; }
+.revitem .rq { font-size: 14.5px; margin-bottom: 5px; }
+.revitem .ra { font-size: 13px; color: var(--paper-dim); }
+.revitem .mark { font-family: var(--f-mono); font-size: 11px; font-weight: 600; letter-spacing: .06em; }
+.revitem .mark.ok { color: var(--live); }
+.revitem .mark.no { color: var(--miss); }
+
+/* misc */
+.empty { text-align: center; color: var(--muted); padding: 34px 10px; }
+.badge {
+  display: inline-block; font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .06em;
+  text-transform: uppercase; padding: 2px 7px; border-radius: 3px;
+  border: 1px solid var(--rule-2); color: var(--paper-dim);
+}
+.badge.due { border-color: var(--signal); color: var(--signal); }
+.badge.weak { border-color: var(--miss); color: var(--miss); }
+.badge.ok { border-color: var(--live); color: var(--live); }
+
+.toast {
+  position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+  background: var(--ink-4); border: 1px solid var(--rule-2); color: var(--paper);
+  padding: 10px 16px; border-radius: var(--r); font-size: 14px; z-index: 90;
+  box-shadow: 0 10px 30px rgba(0,0,0,.45);
+}
+
+.sticky-actions {
+  position: sticky; bottom: 0; z-index: 30;
+  background: linear-gradient(rgba(14,18,22,0), var(--ink) 34%);
+  padding: 14px 0 calc(10px + env(safe-area-inset-bottom));
+  margin-top: 8px;
+}
+
+.hid { display: none !important; }
+
+/* ---------------- responsive ---------------- */
+@media (max-width: 560px) {
+  #app { padding: 12px 12px 56px; }
+  h1 { font-size: 27px; }
+  .qstem { font-size: 17px; }
+  .opt { font-size: 15px; padding: 11px 12px; }
+  .score .big { font-size: 52px; }
+  .mgrid { grid-template-columns: 1fr; }
+  .mgrid .rcol { margin-top: 10px; }
+}
+
+@media (min-width: 720px) {
+  .modgrid { grid-template-columns: 1fr; }
+}
+
+@media print {
+  .appbar, .sticky-actions, .btn, .iconbtn { display: none !important; }
+  body { background: #fff; color: #000; }
+}
+
+/* ---------------- drug reference ---------------- */
+/* The card is a monograph, not a tile: one hairline rail, no nested boxes,
+   and dosing gets the only accent so it reads first when the card opens. */
+.drugcard {
+  border: 1px solid var(--rule); border-left: 3px solid var(--cool);
+  border-radius: var(--r); background: var(--ink-2);
+  margin: 0 0 8px; overflow: hidden;
+}
+.drugcard.open { background: var(--ink-2); border-color: var(--rule-2); border-left-color: var(--cool); }
+
+.drughead {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  background: none; border: 0; color: inherit; font: inherit;
+  padding: 13px 14px; cursor: pointer; text-align: left;
+}
+.drughead .dh-main { flex: 1; min-width: 0; }
+.dh-name { display: block; font-family: var(--f-disp); font-size: 21px; font-weight: 600; line-height: 1.1; }
+.dh-sub { display: block; font-size: 11.5px; color: var(--muted); margin-top: 1px; }
+
+.drugpeek {
+  padding: 0 14px 12px; font-size: 12.5px; color: var(--muted);
+  font-family: var(--f-mono); line-height: 1.45;
+}
+.drugbody { padding: 0 14px 16px; }
+
+.doses { margin: 0 0 16px; }
+.dosegroup + .dosegroup { margin-top: 12px; }
+.dosewho {
+  font-family: var(--f-disp); font-weight: 700; font-size: 12px;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--signal);
+  margin-bottom: 6px;
+}
+.dose { border-left: 2px solid var(--signal); padding: 2px 0 2px 11px; margin-bottom: 9px; }
+.dose-l { font-size: 13px; color: var(--paper-dim); line-height: 1.35; }
+.dose-v { font-size: 15.5px; line-height: 1.45; font-variant-numeric: tabular-nums; }
+
+.drow { margin-bottom: 11px; }
+.dk {
+  font-family: var(--f-mono); font-size: 10.5px; letter-spacing: .09em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 3px;
+}
+.dv { font-size: 14.5px; line-height: 1.5; }
+.dlist { margin: 0; padding-left: 17px; font-size: 14.5px; line-height: 1.5; }
+.dlist li { margin-bottom: 2px; }
+.dlist.miss li::marker { color: var(--miss); }
+
+/* ---------------- rhythm strips ---------------- */
+/* A strip is a measuring instrument: the 1 mm grid has to stay countable, so it
+   holds a minimum width and scrolls in its own track rather than shrinking to
+   fit a phone. */
+.stripwrap { margin: 0 0 14px; }
+.stripscroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--rule);
+  border-radius: var(--r);
+  background: var(--ink);
+}
+.stripscroll .strip {
+  display: block;
+  min-width: 660px;
+  width: 100%;
+  height: auto;
+}
+/* a 12-lead carries four columns, so it needs more room before the leads
+   become too small to compare */
+.stripscroll .strip.wide { min-width: 1000px; }
+.striphint {
+  color: var(--muted);
+  font-size: 10.5px;
+  margin-top: 4px;
+  letter-spacing: .04em;
+}
+/* A 12-lead is four columns wide and stays unreadable inside a 760px text
+   column, so it breaks out to the full viewport and scrolls only when it still
+   does not fit. */
+.stripwrap.ecg {
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  margin-top: -16px;          /* sit flush against the panel's top edge */
+}
+.stripwrap.ecg .stripscroll {
+  border-left: 0; border-right: 0; border-radius: 0;
+}
+.stripwrap.ecg .striphint { padding: 0 16px; }
+
+@media (min-width: 720px) {
+  .stripwrap:not(.ecg) .striphint { display: none; }
+}
+@media (min-width: 1120px) {
+  .stripwrap.ecg .striphint { display: none; }
+}

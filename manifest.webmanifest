@@ -1,0 +1,22 @@
+{
+  "name": "Paramedic Exam Suite",
+  "short_name": "Exam Suite",
+  "description": "Offline exam practice for the paramedic program — every module, one app.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0E1216",
+  "theme_color": "#0E1216",
+  "categories": ["education", "medical"],
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Review due", "url": "./index.html#/progress" },
+    { "name": "Build an exam", "url": "./index.html#/build" }
+  ]
+}

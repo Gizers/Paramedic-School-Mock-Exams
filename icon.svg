@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Paramedic Exam Suite">
+  <rect width="512" height="512" rx="96" fill="#0E1216"/>
+  <rect x="40" y="40" width="432" height="432" rx="64" fill="none" stroke="rgba(169,180,188,0.20)" stroke-width="6"/>
+  <path d="M212 116h88v96h96v88h-96v96h-88v-96h-96v-88h96z" fill="#F0A81E"/>
+  <path d="M56 300h84l26-64 34 128 30-92 22 44h204"
+        fill="none" stroke="#37C98A" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"
+        opacity="0.92"/>
+</svg>
