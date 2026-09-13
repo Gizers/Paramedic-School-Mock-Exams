@@ -1,7 +1,7 @@
 /* Flat build: the entire app is index.html, so the precache is five files.
    Cache-first for the shell (it never changes between deploys), and a runtime
    cache for the Google Fonts stylesheet + woff2 so the app looks right offline. */
-const V = 'pmx-flat-v4';
+const V = 'pmx-flat-v5';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest',
                'icon-192.png', 'icon-512.png', 'icon-maskable-512.png'];
 
@@ -11,7 +11,9 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys()
     .then(ks => Promise.all(ks.filter(k => k !== V).map(k => caches.delete(k))))
-    .then(() => self.clients.claim()));
+    .then(() => self.clients.claim())
+    .then(() => self.clients.matchAll({type:'window'}))
+    .then(cs => cs.forEach(c => c.postMessage('pmx-updated'))));
 });
 self.addEventListener('fetch', e => {
   const r = e.request;
